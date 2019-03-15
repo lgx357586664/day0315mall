@@ -1,5 +1,6 @@
 package com.zr.webmall.item.servlet;
 
+import com.zr.webmall.framework.PageBean;
 import com.zr.webmall.item.dao.ItemsDao;
 import com.zr.webmall.item.entity.Items;
 
@@ -25,13 +26,25 @@ public class ItemssServlet extends HttpServlet {
         }else if("delete".equals(method)){
             delete(request,response);
         }else if("query".equals(method)){
-            query(request,response);
+            page(request, response);
         }else if("update".equals(method)){
             update(request,response);
         }else if("queryOne".equals(method)){
             queryOne(request,response);
         }
     }
+
+    private void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int pageIndex=1;
+        int pageCount=10;
+        if (request.getParameter("pageIndex")!=null){
+            pageIndex=Integer.parseInt(request.getParameter("pageIndex"));
+        }
+        PageBean<Items> pageBean = dao.queryPageBean(pageIndex,pageCount);
+        request.setAttribute("pageBean",pageBean);
+        request.getRequestDispatcher("/query.jsp").forward(request,response);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

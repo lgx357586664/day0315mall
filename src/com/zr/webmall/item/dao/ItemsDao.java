@@ -1,10 +1,12 @@
 package com.zr.webmall.item.dao;
 
 import com.zr.webmall.framework.DataUtil;
+import com.zr.webmall.framework.PageBean;
 import com.zr.webmall.item.entity.Items;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -65,5 +67,32 @@ public class ItemsDao {
             e.printStackTrace();
         }
         return 0;
+    }
+    public PageBean<Items> queryPageBean(int pageIndex, int pageCount){
+        PageBean<Items> pageBean =new PageBean<>();
+        pageBean.setCount(getCount());
+        pageBean.setPageCount(pageCount);
+        pageBean.setPageIndex(pageIndex);
+        int index = pageBean.getIndex();
+        String sql="select *from items limit ?,?";
+        List<Items> itemsList = null;
+        try {
+            itemsList = qr.query(sql, new BeanListHandler<>(Items.class), index, pageCount);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        pageBean.setList(itemsList);
+        return pageBean;
+    }
+    public int getCount(){
+        String sql="select count(*) count from items";
+        int count=0;
+        try {
+            Number query = qr.query(sql, new ScalarHandler<>());
+            count=query.intValue();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
