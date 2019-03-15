@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>查询</title>
@@ -22,7 +23,7 @@
         <td>action</td>
     </tr>
 
-    <c:forEach var="map" items="${all }">
+    <c:forEach var="map" items="${all}">
         <tr>
             <td>${map.id}</td>
             <td>${map.name}</td>
@@ -31,8 +32,8 @@
             <td>${map.number}</td>
             <td>${map.picture}</td>
             <td>
-                <a href="ItemsServlet?method=delete&id=${map.id}">delete</a>
-                <a href="ItemsServlet?method=queryOne&id=${map.id}">update</a>
+                <a href="ItemssServlet?method=delete&id=${map.id}">delete</a>
+                <a href="ItemssServlet?method=queryOne&id=${map.id}">update</a>
             </td>
         </tr>
     </c:forEach>

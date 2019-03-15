@@ -1,12 +1,12 @@
-package com.zr.webmall.dao;
+package com.zr.webmall.item.dao;
 
 import com.zr.webmall.framework.DataUtil;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanMapHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +17,14 @@ import java.util.Map;
 public class ItemDao {
     private QueryRunner qr=new QueryRunner(DataUtil.getDataSource());
     public List<Map<String, Object>> findAll(){
-        String sql="select * from items";
+        List<Map<String, Object>> list = new ArrayList<>();
+        String sql = "select * from items";
         try {
-            List<Map<String, Object>> list = qr.query(sql, new MapListHandler());
-            return list;
+            list = qr.query(sql, new MapListHandler());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return list;
     }
     public Map<String, Object> queryOne(int id) {
         String sql = "select * from items where id=?";

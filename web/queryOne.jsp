@@ -11,43 +11,43 @@
     <title>Title</title>
 </head>
 <body>
-<form action="ItemsServlet">
+<form action="ItemssServlet">
     <input type="hidden" name="method" value="update">
     <table>
         <tr>
             <td>id</td>
             <td>
-                <input type="text" name="id" readonly value="${map.id}">
+                <input type="text" name="id" readonly value="${items.id}">
             </td>
         </tr>
         <tr>
             <td>name</td>
             <td>
-                <input type="text" name="name" value="${map.name}">
+                <input type="text" name="name" value="${items.name}">
             </td>
         </tr>
         <tr>
             <td>city</td>
             <td>
-                <input type="text" name="city" value="${map.city}">
+                <input type="text" name="city" value="${items.city}">
             </td>
         </tr>
         <tr>
             <td>price</td>
             <td>
-                <input type="text" name="price" value="${map.price}">
+                <input type="text" name="price" value="${items.price}">
             </td>
         </tr>
         <tr>
             <td>number</td>
             <td>
-                <input type="text" name="number" value="${map.number}">
+                <input type="text" name="number" value="${items.number}">
             </td>
         </tr>
         <tr>
             <td>picture</td>
             <td>
-                <input type="text" name="picture" value="${map.picture}">
+                <input type="text" name="picture" value="${items.picture}">
             </td>
         </tr>
         <tr>

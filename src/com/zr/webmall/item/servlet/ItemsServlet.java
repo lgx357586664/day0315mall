@@ -1,6 +1,6 @@
-package com.zr.webmall.servlet;
+package com.zr.webmall.item.servlet;
 
-import com.zr.webmall.dao.ItemDao;
+import com.zr.webmall.item.dao.ItemDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +37,7 @@ public class ItemsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
-    private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void add(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");
@@ -55,7 +55,7 @@ public class ItemsServlet extends HttpServlet {
         int i = dao.add(map);
         resp.sendRedirect(req.getContextPath()+"/ItemsServlet?method=query");
     }
-    private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String id = req.getParameter("id");
         dao.delete(Integer.parseInt(id));
         resp.sendRedirect(req.getContextPath()+"/ItemsServlet?method=query");
@@ -73,10 +73,9 @@ public class ItemsServlet extends HttpServlet {
         Map<String, Object> map = dao.queryOne(Integer.parseInt(id));
         req.setAttribute("map",map);
         req.getRequestDispatcher("/queryOne.jsp").forward(req,resp);
-
     }
 
-    private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void update(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");

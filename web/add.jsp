@@ -11,7 +11,7 @@
     <title>添加</title>
 </head>
 <body>
-<form action="ItemsServlet">
+<form action="ItemssServlet">
     <input type="hidden" name="method" value="add">
     <table>
         <tr>
