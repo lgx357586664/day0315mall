@@ -12,7 +12,7 @@
     <title>查询商品</title>
 </head>
 <body>
-<table border="1px" width="65%">
+<table border="1px" width="65%" cellpadding="10px" >
     <tr>
         <td>序号</td>
         <td>商品名称</td>
@@ -32,15 +32,17 @@
             <td>${map.number}</td>
             <td><img src="image/${map.picture}"width="100px" height="100px"title=${map.name}></td>
             <td>
-                <a href="ItemssServlet?method=delete&id=${map.id}">delete</a>
-                <a href="ItemssServlet?method=queryOne&id=${map.id}">update</a>
+                <a href="ItemssServlet?method=delete&id=${map.id}">删除</a>
+                <a href="ItemssServlet?method=queryOne&id=${map.id}">修改</a>
+                <a href="add.jsp">添加</a>
+                <a href="ItemssServlet?method=detail&id=${map.id}">查看</a></td>
             </td>
         </tr>
     </c:forEach>
     <tr>
         <td colspan="7">
             <c:if test="${pageBean.pageIndex>1}">
-                <a href="ItemssServlet?method=query&pageIndex=${pageBean.pageIndex-1}">上一页</a>
+                <a href="ItemssServlet?method=pageQuery&pageIndex=${pageBean.pageIndex-1}">上一页</a>
             </c:if>
             <c:choose>
                 <c:when test="${pageBean.pages<=10}">
@@ -67,15 +69,14 @@
                     【${i}】
                 </c:if>
                 <c:if test="${pageBean.pageIndex!=i}">
-                    <a href="ItemsServlet?method=query&pageIndex=${i}">【${i}】</a>
+                    <a href="ItemssServlet?method=pageQuery&pageIndex=${i}">【${i}】</a>
                 </c:if>
             </c:forEach>
             <c:if test="${pageBean.pageIndex<pageBean.pages}">
-                <a href="ItemssServlet?method=query&pageIndex=${pageBean.pageIndex+1}">下一页</a>
+                <a href="ItemssServlet?method=pageQuery&pageIndex=${pageBean.pageIndex+1}">下一页</a>
             </c:if>
         </td>
     </tr>
 </table>
-<a href="add.jsp">add</a>
 </body>
 </html>

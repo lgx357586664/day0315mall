@@ -12,6 +12,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  <c:redirect url="${request.contextPath}/ItemssServlet?method=query"></c:redirect>
+  <c:redirect url="${request.contextPath}/ItemssServlet?method=pageQuery"></c:redirect>
   </body>
 </html>

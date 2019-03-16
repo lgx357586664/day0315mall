@@ -1,6 +1,7 @@
 package com.zr.webmall.item.servlet;
 
 import com.zr.webmall.framework.PageBean;
+import com.zr.webmall.item.dao.ItemDao;
 import com.zr.webmall.item.dao.ItemsDao;
 import com.zr.webmall.item.entity.Items;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: LiGX
@@ -26,15 +28,39 @@ public class ItemssServlet extends HttpServlet {
         }else if("delete".equals(method)){
             delete(request,response);
         }else if("query".equals(method)){
-            page(request, response);
+            query(request,response);
         }else if("update".equals(method)){
             update(request,response);
         }else if("queryOne".equals(method)){
             queryOne(request,response);
+        }else if("pageQuery".equals(method)){
+            pageQuery(request, response);
+        }else if("detail".equals(method)){
+            detail(request,response);
         }
     }
 
-    private void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * 查询详情
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Items items = dao.queryOne(Integer.parseInt(id));
+        request.setAttribute("items",items);
+        request.getRequestDispatcher("/detail.jsp").forward(request,response);
+    }
+    /**
+     * 分页查询
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageIndex=1;
         int pageCount=10;
         if (request.getParameter("pageIndex")!=null){
@@ -49,20 +75,19 @@ public class ItemssServlet extends HttpServlet {
         doPost(request,response);
     }
     private void add(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
-        String id = req.getParameter("id");
         String name = req.getParameter("name");
         String city = req.getParameter("city");
         String price = req.getParameter("price");
         String number = req.getParameter("number");
         String picture = req.getParameter("picture");
-        Items items=new Items(Integer.parseInt(id),name,city,Integer.parseInt(price),Integer.parseInt(number),picture);
+        Items items=new Items(name,city,Integer.parseInt(price),Integer.parseInt(number),picture);
         dao.add(items);
-        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=query");
+        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=pageQuery");
     }
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String id = req.getParameter("id");
         dao.delete(Integer.parseInt(id));
-        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=query");
+        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=pageQuery");
     }
     private void query(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Items> all = dao.findAll();
@@ -84,6 +109,6 @@ public class ItemssServlet extends HttpServlet {
         String picture = req.getParameter("picture");
         Items items=new Items(Integer.parseInt(id),name,city,Integer.parseInt(price),Integer.parseInt(number),picture);
         dao.update(items);
-        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=query");
+        resp.sendRedirect(req.getContextPath()+"/ItemssServlet?method=pageQuery");
     }
 }

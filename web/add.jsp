@@ -15,45 +15,39 @@
     <input type="hidden" name="method" value="add">
     <table>
         <tr>
-            <td>id</td>
-            <td>
-                <input type="text" name="id" >
-            </td>
-        </tr>
-        <tr>
-            <td>name</td>
+            <td>商品名称</td>
             <td>
                 <input type="text" name="name" >
             </td>
         </tr>
         <tr>
-            <td>city</td>
+            <td>产地</td>
             <td>
                 <input type="text" name="city" >
             </td>
         </tr>
         <tr>
-            <td>price</td>
+            <td>单价</td>
             <td>
                 <input type="text" name="price" >
             </td>
         </tr>
         <tr>
-            <td>number</td>
+            <td>数量</td>
             <td>
                 <input type="text" name="number" >
             </td>
         </tr>
         <tr>
-            <td>picture</td>
+            <td>图片</td>
             <td>
                 <input type="text" name="picture" >
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="add">
-                <input type="reset" value="reset">
+                <input type="submit" value="保存">
+                <input type="reset" value="重置">
             </td>
         </tr>
     </table>

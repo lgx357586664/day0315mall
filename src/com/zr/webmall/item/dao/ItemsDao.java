@@ -59,7 +59,7 @@ public class ItemsDao {
         return 0;
     }
     public  int add(Items items){
-        String sql="insert into items (id,name,city,price,number,picture)values(null,?,?,?,?,?)";
+        String sql="insert into items (name,city,price,number,picture)values(?,?,?,?,?)";
         try {
             int i = qr.update(sql, items.getName(), items.getCity(), items.getPrice(), items.getNumber(), items.getPicture());
             return i;

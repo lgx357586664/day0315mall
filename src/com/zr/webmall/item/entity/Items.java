@@ -71,4 +71,12 @@ public class Items {
         this.number = number;
         this.picture = picture;
     }
+
+    public Items(String name, String city, int price, int number, String picture) {
+        this.name = name;
+        this.city = city;
+        this.price = price;
+        this.number = number;
+        this.picture = picture;
+    }
 }
